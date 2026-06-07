@@ -80,3 +80,24 @@ export async function fetchIssueAttachments(id) {
     return [];
   }
 }
+
+export async function fetchIssueStatuses() {
+  try {
+    const res = await client.get("/issues/issue-statuses/");
+    const data = res.data;
+    return Array.isArray(data) ? data : data.results ?? [];
+  } catch (_e) {
+    return [];
+  }
+}
+
+// Partial update (status / flags / reasons / rating).
+export async function updateIssue(id, body) {
+  const res = await client.patch(`/issues/${id}/update/`, body);
+  return res.data;
+}
+
+export async function addComment(id, comment) {
+  const res = await client.post(`/issues/${id}/add-comment`, { comment });
+  return res.data;
+}

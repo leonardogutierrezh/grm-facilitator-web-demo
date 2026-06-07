@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { t } from "../i18n";
-import { fetchIssue, fetchIssueComments } from "../api";
+import { fetchIssue, fetchIssueComments, fetchIssueStatuses } from "../api";
 import { Header, IconChevronCircle } from "../components";
 import { formatDate, daysSince } from "../util";
+import IssueActions from "./IssueActions";
 
 function Row({ label, value }) {
   return (
@@ -97,19 +98,29 @@ export default function IssueDetail({ issue: initial }) {
   const [tab, setTab] = useState("details");
   const [issue, setIssue] = useState(initial);
   const [comments, setComments] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+
+  const refresh = useCallback(async () => {
+    try {
+      const full = await fetchIssue(initial.id);
+      if (full) setIssue((prev) => ({ ...prev, ...full }));
+    } catch (_e) {
+      /* keep list data */
+    }
+    try {
+      setComments(await fetchIssueComments(initial.id));
+    } catch (_e) {
+      /* ignore */
+    }
+  }, [initial.id]);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      await refresh();
       try {
-        const full = await fetchIssue(initial.id);
-        if (!cancelled && full) setIssue({ ...initial, ...full });
-      } catch (_e) {
-        /* keep list data */
-      }
-      try {
-        const c = await fetchIssueComments(initial.id);
-        if (!cancelled) setComments(c);
+        const s = await fetchIssueStatuses();
+        if (!cancelled) setStatuses(s);
       } catch (_e) {
         /* ignore */
       }
@@ -117,7 +128,7 @@ export default function IssueDetail({ issue: initial }) {
     return () => {
       cancelled = true;
     };
-  }, [initial]);
+  }, [initial, refresh]);
 
   const date = issue.intake_date || issue.created_date;
 
@@ -200,12 +211,12 @@ export default function IssueDetail({ issue: initial }) {
       )}
 
       {tab === "actions" && (
-        <div className="scroll" style={{ padding: 24, textAlign: "center", color: "#9aa0a6" }}>
-          <p style={{ marginTop: 30, fontSize: 13, lineHeight: "20px" }}>
-            Démo en lecture seule — la prise d'actions (accepter, rejeter, escalader, résoudre)
-            est désactivée dans cette version de démonstration.
-          </p>
-        </div>
+        <IssueActions
+          issue={issue}
+          statuses={statuses}
+          onViewDetails={() => setTab("details")}
+          onUpdated={refresh}
+        />
       )}
     </>
   );

@@ -139,3 +139,65 @@ export function Spinner() {
     </div>
   );
 }
+
+export const IconRightSquare = ({ enabled = true, size = 34 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={enabled ? C : "#e6e6e6"}>
+    <rect x="2" y="2" width="20" height="20" rx="4" />
+    <path d="M10 8l4 4-4 4" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+export const IconHelp = ({ size = 22, color = "#9aa0a6" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .8-1 1.7" />
+    <line x1="12" y1="17" x2="12" y2="17" />
+  </svg>
+);
+export const IconPhone = ({ size = 30, color = C }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1z" />
+  </svg>
+);
+export const IconWhatsapp = ({ size = 30, color = C }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+    <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.5 12.7l-.3.4.6 2-2-.6-.4.2A8 8 0 1 1 12 4zm-3 4c-.3 0-.6.1-.8.4-.3.3-1 1-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 4.9 4.2 2.4.9 2.9.7 3.4.7s1.6-.7 1.9-1.3c.2-.6.2-1.2.2-1.3l-.9-.5s-1.3-.6-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1s-1-.4-1.9-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5-.5-1.3-.7-1.8c-.2-.4-.4-.4-.5-.4z" />
+  </svg>
+);
+
+/* Centered modal dialog */
+export function Modal({ title, children, onClose }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: "rgba(0,0,0,0.4)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 50,
+        padding: 20,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#fff",
+          borderRadius: 14,
+          padding: 18,
+          width: "100%",
+          maxWidth: 330,
+          boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+        }}
+      >
+        {title && (
+          <div style={{ fontWeight: 700, color: "#707070", fontSize: 16, marginBottom: 12, textAlign: "center" }}>
+            {title}
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
+  );
+}
