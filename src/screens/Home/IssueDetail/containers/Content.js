@@ -129,7 +129,7 @@ function Content({ issue, attachments, refetchAttachment }) {
         <View
           style={{
             flexDirection: 'row',
-            flex: 1,
+            alignSelf: 'stretch',
             justifyContent: 'space-between',
             marginTop: 10,
           }}

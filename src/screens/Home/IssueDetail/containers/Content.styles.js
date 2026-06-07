@@ -42,8 +42,14 @@ export const styles = StyleSheet.create({
   },
   collapsibleTrigger: {
     flexDirection: "row",
-    flex: 1,
+    // NOTE: `flex: 1` here collapses the trigger's height to 0 on
+    // react-native-web (flex-basis 0% in an auto-height column), which made the
+    // section headers overlap the rows above. `alignSelf: stretch` spans the
+    // full width with natural height on both web and native.
+    alignSelf: "stretch",
+    alignItems: "center",
     justifyContent: "space-between",
+    paddingVertical: 6,
   },
   collapsibleContent: {
     borderRadius: 10,

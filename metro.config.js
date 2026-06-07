@@ -11,6 +11,9 @@ const WEB_MODULE_STUBS = {
   // Native-only dev tool (deep-imports react-native internals that don't exist on web).
   'reactotron-react-native': path.resolve(__dirname, 'web-stubs/empty-module.js'),
   'reactotron-redux': path.resolve(__dirname, 'web-stubs/empty-module.js'),
+  // react-native-collapsible's height-measuring ghost view overlaps content on
+  // react-native-web; use a simple show/hide replacement instead.
+  'react-native-collapsible': path.resolve(__dirname, 'web-stubs/collapsible.js'),
 };
 
 module.exports = (async () => {
