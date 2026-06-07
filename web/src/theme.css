@@ -1,0 +1,280 @@
+:root {
+  --primary: #24c38b;
+  --disabled: #eeeeee;
+  --in-progress: #f5ba74;
+  --lightgray: #dedede;
+  --error: #ef6a78;
+  --secondary: #707070;
+  --white: #ffffff;
+  --phone-w: 390px;
+  --phone-h: 844px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  color: var(--secondary);
+}
+
+#root {
+  height: 100%;
+}
+
+/* ---------- Desktop: centered phone box on a backdrop ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px 0;
+  overflow: auto;
+  background: radial-gradient(120% 90% at 50% 0%, #f3fbf7 0%, #e4f3ec 45%, #cfe9dd 100%);
+}
+
+.backdrop-title {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  color: #1f7a5a;
+  flex: 0 0 auto;
+}
+.backdrop-title b {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.backdrop-title span {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #4a9c7c;
+}
+
+.phone {
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: #fff;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px rgba(20, 60, 45, 0.35),
+    0 8px 22px -12px rgba(0, 0, 0, 0.25);
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* On real phones, fill the screen */
+@media (max-width: 700px) {
+  .backdrop {
+    padding: 0;
+    gap: 0;
+    background: #fff;
+    display: block;
+  }
+  .backdrop-title {
+    display: none;
+  }
+  .phone {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* ---------- App shell ---------- */
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #fff;
+}
+
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ededed;
+  flex: 0 0 auto;
+}
+.app-header .back {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+}
+.app-header .title {
+  text-align: center;
+}
+.app-header .title .t {
+  font-weight: 500;
+  font-size: 17px;
+  color: #373737;
+}
+.app-header .title .v {
+  font-size: 11px;
+  color: var(--secondary);
+}
+.app-header .search {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+/* Bottom tab bar */
+.tabbar {
+  display: flex;
+  border-top: 1px solid #ededed;
+  flex: 0 0 auto;
+  background: #fff;
+}
+.tabbar button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  color: #9aa0a6;
+  font-size: 11px;
+  font-family: inherit;
+}
+.tabbar button.active {
+  color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:disabled {
+  background: var(--lightgray);
+  cursor: default;
+}
+.btn-block {
+  width: 100%;
+  height: 47px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+/* Text inputs (Material-ish outlined) */
+.field {
+  position: relative;
+  margin-bottom: 16px;
+}
+.field input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--lightgray);
+  border-radius: 12px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--secondary);
+  padding: 0 16px 0 46px;
+  outline: none;
+}
+.field input:focus {
+  border-color: var(--primary);
+  border-width: 2px;
+}
+.field .field-label {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: #fff;
+  padding: 0 6px;
+  font-size: 12px;
+  color: #9aa0a6;
+}
+.field input:focus + .field-label,
+.field input:focus ~ .field-label {
+  color: var(--primary);
+}
+.field .field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  display: flex;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.field .err {
+  color: var(--error);
+  font-size: 12px;
+  padding-left: 14px;
+  margin-top: 4px;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--lightgray);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.center-fill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

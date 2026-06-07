@@ -1,13 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npx expo export --platform web --output-dir dist",
-  "outputDirectory": "dist",
-  "installCommand": "yarn install --frozen-lockfile",
+  "installCommand": "npm --prefix web install",
+  "buildCommand": "npm --prefix web run build",
+  "outputDirectory": "web/dist",
   "framework": null,
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "https://grm-web-app-benin.vercel.app/$1"
+    },
+    {
+      "source": "/((?!api/|assets/|favicon).*)",
+      "destination": "/index.html"
     }
   ]
 }
