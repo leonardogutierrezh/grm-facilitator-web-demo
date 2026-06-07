@@ -63,7 +63,7 @@ const PhoneFrame = () => {
         gap: 16,
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        overflow: "hidden",
+        overflow: "auto",
       }}
     >
       <div
@@ -82,7 +82,12 @@ const PhoneFrame = () => {
         </span>
       </div>
 
-      <div style={{ transform: `scale(${scale})`, transformOrigin: "center" }}>
+      {/*
+        Scale with `zoom`, NOT `transform: scale()`. A CSS transform on an
+        iframe ancestor breaks native keyboard input into the iframe in
+        Chromium (dropped keystrokes); `zoom` scales without that bug.
+      */}
+      <div style={{ zoom: scale }}>
         <div
           style={{
             width: SCREEN_W,
