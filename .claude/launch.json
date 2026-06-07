@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "grm-web-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve-dist.js", "4321"],
+      "port": 4321
+    }
+  ]
+}
