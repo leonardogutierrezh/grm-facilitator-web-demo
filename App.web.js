@@ -1,55 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+// Side effect: on desktop web, style #root as a centered phone-sized box.
+import "./src/web/installPhoneShell";
 import AppRoot from "./src/AppRoot";
-import PhoneFrame from "./src/web/PhoneFrame";
-
-const DESKTOP_MIN_WIDTH = 700; // below this we assume a real phone -> no frame
-
-function isEmbedded() {
-  if (typeof window === "undefined") return false;
-  try {
-    if (window.self !== window.top) return true;
-  } catch (_e) {
-    // Cross-origin access throws -> we are definitely inside an iframe.
-    return true;
-  }
-  return new URLSearchParams(window.location.search).has("embed");
-}
 
 /**
- * Web entry point.
- *
- * On a desktop browser (wide viewport, top-level window) we render a centered
- * iPhone-style bezel containing an <iframe> that loads this same app with
- * `?embed=1`. Running the app inside the iframe means `Dimensions.get('window')`
- * reports the phone-sized viewport, so every screen lays out exactly as it does
- * on a real device.
- *
- * On a phone-sized viewport (or when already embedded) we render the app
- * directly, full-screen.
+ * Web entry point. The app renders directly (no iframe) into Expo's #root.
+ * On desktop, #root is styled as a centered phone box and Dimensions is pinned
+ * to phone size (see installPhoneShell / patchDimensions). On a phone-sized
+ * viewport everything is a no-op and the app simply fills the screen.
  */
-const App = () => {
-  const embedded = isEmbedded();
-  const [isDesktop, setIsDesktop] = useState(
-    typeof window !== "undefined" ? window.innerWidth >= DESKTOP_MIN_WIDTH : true
-  );
-
-  useEffect(() => {
-    if (embedded) return;
-    const onResize = () => setIsDesktop(window.innerWidth >= DESKTOP_MIN_WIDTH);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [embedded]);
-
-  // `?frame=1` forces the frame even inside an iframe (useful for previewing it).
-  const forceFrame =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).has("frame");
-
-  if (forceFrame || (!embedded && isDesktop)) {
-    return <PhoneFrame />;
-  }
-
-  return <AppRoot />;
-};
+const App = () => <AppRoot />;
 
 export default App;
