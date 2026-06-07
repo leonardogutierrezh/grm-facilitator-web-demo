@@ -40,7 +40,12 @@ const App = () => {
     return () => window.removeEventListener("resize", onResize);
   }, [embedded]);
 
-  if (!embedded && isDesktop) {
+  // `?frame=1` forces the frame even inside an iframe (useful for previewing it).
+  const forceFrame =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).has("frame");
+
+  if (forceFrame || (!embedded && isDesktop)) {
     return <PhoneFrame />;
   }
 
