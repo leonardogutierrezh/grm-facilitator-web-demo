@@ -136,7 +136,7 @@ export default function Dashboard() {
           bg="/assets/BG_9.png"
           title={t("collect_reports")}
           icon={<TeamIcon />}
-          onPress={() => alert("Démo : la collecte de plaintes sera disponible prochainement.")}
+          onPress={() => nav.navigate("CreateIssue")}
         />
         <BigCard
           bg="/assets/purpleBg.png"

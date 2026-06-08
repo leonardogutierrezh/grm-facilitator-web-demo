@@ -259,6 +259,60 @@ body {
   margin-top: 4px;
 }
 
+/* Form controls for the create flow */
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group > label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary);
+  margin-bottom: 6px;
+}
+.form-control {
+  width: 100%;
+  border: 1px solid var(--lightgray);
+  border-radius: 12px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--secondary);
+  padding: 13px 14px;
+  outline: none;
+}
+.form-control:focus {
+  border-color: var(--primary);
+}
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2324c38b' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 38px;
+}
+textarea.form-control {
+  resize: none;
+}
+.step-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 12px 0;
+}
+.step-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lightgray);
+  display: inline-block;
+}
+.step-dots i.on {
+  background: var(--primary);
+  width: 22px;
+  border-radius: 4px;
+}
+
 .spinner {
   width: 34px;
   height: 34px;

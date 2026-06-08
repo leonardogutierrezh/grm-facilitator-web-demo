@@ -9,6 +9,7 @@ import Dashboard from "./screens/Dashboard";
 import IssueSummary from "./screens/IssueSummary";
 import IssueDetail from "./screens/IssueDetail";
 import Profile from "./screens/Profile";
+import CreateIssue from "./screens/CreateIssue";
 
 /* Centered phone box on desktop; full-screen on phones (handled by CSS). */
 function Shell({ children }) {
@@ -72,6 +73,9 @@ function PrivateRouter() {
       break;
     case "IssueDetail":
       content = <IssueDetail issue={params.issue} />;
+      break;
+    case "CreateIssue":
+      content = <CreateIssue />;
       break;
     case "Profile":
       content = <Profile />;

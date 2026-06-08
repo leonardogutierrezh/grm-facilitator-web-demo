@@ -101,3 +101,25 @@ export async function addComment(id, comment) {
   const res = await client.post(`/issues/${id}/add-comment`, { comment });
   return res.data;
 }
+
+// ---- Reference data (for the create-complaint form) ----
+export function fetchIssueTypes() {
+  return fetchAllPages("/issues/issue-types/");
+}
+export function fetchIssueSubTypes() {
+  return fetchAllPages("/issues/issue-subtypes/");
+}
+export function fetchIssueCategories() {
+  return fetchAllPages("/issues/issue-categories/");
+}
+export function fetchRegions() {
+  return fetchAllPages("/issues/regions/");
+}
+export function fetchAgeGroups() {
+  return fetchAllPages("/issues/citizen-age-groups/");
+}
+
+export async function createIssue(body) {
+  const res = await client.post("/issues/create/", body);
+  return res.data;
+}
