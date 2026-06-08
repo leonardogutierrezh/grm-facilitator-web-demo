@@ -118,6 +118,25 @@ export function fetchRegions() {
 export function fetchAgeGroups() {
   return fetchAllPages("/issues/citizen-age-groups/");
 }
+export function fetchComponents() {
+  return fetchAllPages("/issues/components/");
+}
+export function fetchSubComponents() {
+  return fetchAllPages("/issues/subcomponents/");
+}
+export function fetchCitizenGroups() {
+  return fetchAllPages("/issues/citizen-groups/");
+}
+
+export async function uploadAttachment(id, file, isAudio) {
+  const fd = new FormData();
+  fd.append("file", file);
+  if (isAudio) fd.append("is_audio", "true");
+  const res = await client.post(`/issues/${id}/add-attachment`, fd, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return res.data;
+}
 
 export async function createIssue(body) {
   const res = await client.post("/issues/create/", body);

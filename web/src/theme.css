@@ -294,6 +294,58 @@ select.form-control {
 textarea.form-control {
   resize: none;
 }
+/* Citizen-report step typography (mirrors mobile) */
+.step-num {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 29px;
+  margin: 0 0 4px;
+}
+.step-title {
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+.note {
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 17px;
+  margin: 0 0 14px;
+  white-space: pre-line;
+}
+.radio-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--secondary);
+}
+.radio-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--lightgray);
+  flex: 0 0 auto;
+  margin-top: 1px;
+  position: relative;
+}
+.radio-dot.on {
+  border-color: var(--primary);
+}
+.radio-dot.on::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.crowd-illus {
+  height: 90px;
+}
+
 .step-dots {
   display: flex;
   gap: 6px;
