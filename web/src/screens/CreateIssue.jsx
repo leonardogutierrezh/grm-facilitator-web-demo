@@ -166,7 +166,7 @@ export default function CreateIssue() {
   const stepValid = {
     0: true,
     1: contactValid(),
-    2: form.name.trim().length > 0,
+    2: true, // name is optional — defaults to "Anonyme" at submit time
     3: form.date && form.issueType && form.issueSubType && form.category && form.description.trim(),
     4: !!form.region,
     5: true,
